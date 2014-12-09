@@ -16,4 +16,13 @@
         android:layout_marginTop="168dp"
         android:src="@drawable/second" />
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:text="TextView" />
+
 </RelativeLayout>
