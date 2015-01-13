@@ -15,5 +15,6 @@
     <string name="title_activity_third_floor">ThirdFloor</string>
     <string name="title_activity_second_floor">SecondFloor</string>
     <string name="title_activity_first_floor">FirstFloor</string>
+    <string name="title_activity_third">Third</string>
 
 </resources>

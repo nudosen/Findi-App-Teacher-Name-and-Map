@@ -15,6 +15,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -32,46 +35,44 @@ import android.os.Build;
 public class MainActivity extends ActionBarActivity {
 	public final static String EXTRA_MESSAGE = "com.example.nsisong.MESSAGE";
 
-/** Called when the user clicks the Send button */
-public void sendMessage(View view) 
-{
-	//Intent intent = new Intent(this,DisplayMessageActivity.class);
-	EditText editText = (EditText) findViewById(R.id.edit_message);
-	String message = editText.getText().toString();
-	//SharedPreferences sharedPref =getPreferences(Context.MODE_PRIVATE);
-	//SharedPreferences.Editor editor = sharedPref.edit();
-	String foundRoom=FindTeacherNumber(message);
-
-
-int RoomNumber = Integer.valueOf(foundRoom); 
-
-Intent floorIntent = null;
-
-if ( RoomNumber < 4000 && RoomNumber > 3000)	
-{
-	floorIntent = new Intent(this, ThirdFloor.class);
-}
-else if (RoomNumber < 3000 && RoomNumber > 2000)
-{
-	floorIntent = new Intent(this, SecondFloor.class);
-}
-else if (RoomNumber < 2000 && RoomNumber > 1000)
-{ 
-	 floorIntent = new Intent(this, FirstFloor.class);
+	/** Called when the user clicks the Send button */
+	public void sendMessage(View view) 
+	{
+		//Intent intent = new Intent(this,DisplayMessageActivity.class);
+		EditText editText = (EditText) findViewById(R.id.edit_message);
+		String message = editText.getText().toString();
+		//SharedPreferences sharedPref =getPreferences(Context.MODE_PRIVATE);
+		//SharedPreferences.Editor editor = sharedPref.edit();
+		String foundRoom=FindTeacherNumber(message);
 	
-}
-if (floorIntent == null)
-{ 
-	editText.setError("Error! Teacher not found."); //error
-}
-else
-{
-	 floorIntent.putExtra("RoomNumber", "Room Number: " + foundRoom);
-	startActivity(floorIntent);
 	
-}
-
+	int RoomNumber = Integer.valueOf(foundRoom); 
 	
+	Intent floorIntent = null;
+	
+	if ( RoomNumber < 4000 && RoomNumber > 3000)	
+	{
+		floorIntent = new Intent(this, Third.class);
+	}
+	else if (RoomNumber < 3000 && RoomNumber > 2000)
+	{
+		floorIntent = new Intent(this, SecondFloor.class);
+	}
+	else if (RoomNumber < 2000 && RoomNumber > 1000)
+	{ 
+		 floorIntent = new Intent(this, FirstFloor.class);
+		
+	}
+	if (floorIntent == null)
+	{ 
+		editText.setError("Error! Teacher not found."); //error
+	}
+	else
+	{
+		 floorIntent.putExtra("RoomNumber", "Room Number: " + foundRoom);
+		startActivity(floorIntent);
+		
+	}
 }
 
 	
@@ -140,6 +141,8 @@ TextView mTextView; // Member variable for text view in the layout
 		return super.onOptionsItemSelected(item);
 	}
 
+
+	
 	/**
 	 * A placeholder fragment containing a simple view.
 	 */

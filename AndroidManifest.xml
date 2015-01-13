@@ -32,18 +32,22 @@
         </activity>
         <activity
             android:name=".ThirdFloor"
-            android:label="@string/title_activity_third_floor" 
-            android:parentActivityName="com.example.nsisong.MainActivity" >
+            android:label="@string/title_activity_third_floor"
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".SecondFloor"
-            android:label="@string/title_activity_second_floor" 
-            android:parentActivityName="com.example.nsisong.MainActivity" >
+            android:label="@string/title_activity_second_floor"
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".FirstFloor"
-            android:label="@string/title_activity_first_floor" 
-            android:parentActivityName="com.example.nsisong.MainActivity" >
+            android:label="@string/title_activity_first_floor"
+            android:parentActivityName=".MainActivity" >
+        </activity>
+        <activity
+            android:name=".Third"
+            android:label="@string/title_activity_third" >
         </activity>
     </application>
 

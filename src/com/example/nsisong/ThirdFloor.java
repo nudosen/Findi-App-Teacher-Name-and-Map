@@ -2,7 +2,11 @@ package com.example.nsisong;
 
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -15,6 +19,9 @@ public class ThirdFloor extends ActionBarActivity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	    getActionBar().setHomeButtonEnabled(true);
 		setContentView(R.layout.activity_third_floor);
+		
+		Bitmap b = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+		Canvas canvas = new Canvas(b);
 		
 		String newString;
 		if (savedInstanceState == null) {
@@ -32,6 +39,16 @@ public class ThirdFloor extends ActionBarActivity {
 			number.setText(newString);
 			
 	}
+
+	
+	protected void onDraw (Canvas canvas)
+	{
+		Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.layout.activity_third_floor);
+		canvas.drawBitmap(bmp, 50, 50, null);
+		TextView number = (TextView) findViewById(R.id.textView1);
+		number.setText("Hi Charles");
+	}
+	
 	
 	
 	@Override
