@@ -45,6 +45,12 @@ message=FindTeacherNumber(message);
 
 float a = (Integer.valueOf(message)).floatValue(); 
 
+//if (a >= 4000){
+	//System.out.println("An invalid room number has been entered. Please try again.");
+//}
+
+
+
 if ( a < 4000 && a > 3000)	
 {
 	 intent = new Intent(this, ThirdFloor.class);
