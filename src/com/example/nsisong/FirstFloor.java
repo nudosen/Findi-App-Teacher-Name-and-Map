@@ -2,6 +2,10 @@ package com.example.nsisong;
 
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +24,7 @@ public class FirstFloor extends ActionBarActivity {
 		if (savedInstanceState == null) {
 		   Bundle extras = getIntent().getExtras();
 		    if(extras == null) {
-		        newString= null;
+		        newString= "";
 		    } else {
 		        newString= extras.getString("RoomNumber");
 		    }
@@ -30,6 +34,10 @@ public class FirstFloor extends ActionBarActivity {
 		
 		TextView number = (TextView) findViewById(R.id.textView1);
 		number.setText(newString);
+		
+		Canvas canvas = new Canvas();
+		canvas.drawRect(new Rect(5,5,100,100), new Paint(0xFF0000));
+		
 	}
 	
 	
@@ -58,3 +66,4 @@ public class FirstFloor extends ActionBarActivity {
 	}
 	
 	}
+

@@ -35,71 +35,45 @@ public class MainActivity extends ActionBarActivity {
 /** Called when the user clicks the Send button */
 public void sendMessage(View view) 
 {
-	Intent intent = new Intent(this,DisplayMessageActivity.class);
+	//Intent intent = new Intent(this,DisplayMessageActivity.class);
 	EditText editText = (EditText) findViewById(R.id.edit_message);
 	String message = editText.getText().toString();
-	SharedPreferences sharedPref =getPreferences(Context.MODE_PRIVATE);
-	SharedPreferences.Editor editor = sharedPref.edit();
-message=FindTeacherNumber(message);
+	//SharedPreferences sharedPref =getPreferences(Context.MODE_PRIVATE);
+	//SharedPreferences.Editor editor = sharedPref.edit();
+	String foundRoom=FindTeacherNumber(message);
 
 
-float a = (Integer.valueOf(message)).floatValue(); 
+int RoomNumber = Integer.valueOf(foundRoom); 
 
-//if (a >= 4000){
-	//System.out.println("An invalid room number has been entered. Please try again.");
-//}
+Intent floorIntent = null;
 
-
-
-if ( a < 4000 && a > 3000)	
+if ( RoomNumber < 4000 && RoomNumber > 3000)	
 {
-	 intent = new Intent(this, ThirdFloor.class);
+	floorIntent = new Intent(this, ThirdFloor.class);
 }
-else if (a < 3000 && a > 2000)
+else if (RoomNumber < 3000 && RoomNumber > 2000)
 {
-	intent = new Intent(this, SecondFloor.class);
+	floorIntent = new Intent(this, SecondFloor.class);
+}
+else if (RoomNumber < 2000 && RoomNumber > 1000)
+{ 
+	 floorIntent = new Intent(this, FirstFloor.class);
+	
+}
+if (floorIntent == null)
+{ 
+	editText.setError("Error! Teacher not found."); //error
 }
 else
-{ 
-	intent = new Intent(this, FirstFloor.class);
-}
-	editor.putString ("RoomNumber", message);
-	editor.commit();
-	intent.putExtra("RoomNumber", message);
-    startActivity(intent);
-	LoadMap();
+{
+	 floorIntent.putExtra("RoomNumber", "Room Number: " + foundRoom);
+	startActivity(floorIntent);
 	
 }
-public void LoadMap(){
-	/*File imgFile = new  File("./first.floor.school.png");
 
-	if(imgFile.exists()){
-
-	    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-	    //ImageView myImage = (ImageView) findViewById(R.);
-	    Intent intent = new Intent(this, ImageView.class);
-	    intent.putExtra(EXTRA_MESSAGE, myBitmap);
-	    startActivity(intent);
-
-	    //myImage.setImageBitmap(myBitmap);
-
-	}
-	else {
-		Intent intent = new Intent(this, ThirdFloor.class);
-		intent.putExtra (EXTRA_MESSAGE, "Error!");
-		startActivity(intent);
 	
-	}*/
-	//ImageView imageView = new ImageView(getApplicationContext());
-	//LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-	//String path =  "/Nsisong/bin/res/crunch/drawable-mdpi/first.floor.school.png";
-	//Bitmap image = BitmapFactory.decodeFile(path);
-	//imageView.setImageBitmap(image);
-	//RelativeLayout rl = (RelativeLayout) findViewById(R.id.image);
-	//rl.addView(imageView, lp);
 }
-	
+
 	
 public String FindTeacherNumber(String teacher){
 	String message= "0";
@@ -107,12 +81,12 @@ try {
 	InputStream inputStream = getResources().openRawResource(R.raw.database);
 	BufferedReader buf = new BufferedReader(new InputStreamReader(inputStream));
 	String line;
+	String delims = ";";
 	while((line=buf.readLine())!= null)
 	{
-		if (line.contains(teacher))
-		{
-			String delims = ";";
-			String[] tokens = line.split(delims);
+		String[] tokens = line.split(delims);
+		if (tokens[0].toLowerCase().equals(teacher.toLowerCase()))
+		{		
 			message= tokens[1];
 			break;
 		}
