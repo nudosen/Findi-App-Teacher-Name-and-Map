@@ -86,7 +86,9 @@ try {
 	while((line=buf.readLine())!= null)
 	{
 		String[] tokens = line.split(delims);
-		if (tokens[0].toLowerCase().equals(teacher.toLowerCase()))
+		
+		if ((tokens.length == 2) &&
+				tokens[0].toLowerCase().equals(teacher.toLowerCase()))
 		{		
 			message= tokens[1];
 			break;

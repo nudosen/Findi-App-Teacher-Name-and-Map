@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,12 +25,15 @@ public class Third extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_third);
+		//setContentView(R.layout.activity_third);
+		setContentView( new DrawView(this));
+		/*
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 			
 		}
+		*/
 		 //ViewGroup myLayout = (ViewGroup) findViewById(R.id.view1);
 
 	        //drawing = new DrawView(this);
@@ -60,13 +64,49 @@ public class Third extends ActionBarActivity {
         public DrawView(Context context) {
             super(context);
         }
-
+        
+        @Override
         protected void onDraw(Canvas canvas) {
-            Paint myPaint = new Paint();
-            myPaint.setColor(Color.BLACK);
-            //draw a circle
-            Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.layout.activity_third_floor);
-    		canvas.drawBitmap(bmp, 50, 50, null);
+        	super.onDraw(canvas);
+        	int x = getWidth();
+        	int y = getHeight();
+        	int radius;
+        	radius = 3;
+        	Paint paint = new Paint();
+        	paint.setColor(Color.RED);
+        	
+        	
+        	
+            Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.third);
+    	//replace third with first and second respectively
+    		int ThirdFloorPicturex= bmp.getHeight();
+    		int ThirdFloorPicturey= bmp.getWidth();
+    		Rect src = new Rect();
+    		Rect dst = new Rect();
+    		
+    		dst.right= x;
+    		dst.bottom= y-60;
+    		dst.left= 0;
+    		dst.top= 0;
+    		
+    		src.right= ThirdFloorPicturex;
+    		src.bottom=ThirdFloorPicturey;
+    		src.left=0;
+    		src.top=0;
+    		
+
+    		
+    		canvas.drawBitmap(bmp, src, dst, null);
+    		
+    		canvas.drawCircle(31, 48, radius, paint);
+
+    		String string = Integer.toString(ThirdFloorPicturex) + ", " + Integer.toString(ThirdFloorPicturey);
+    		paint.setTextSize(20);
+    		canvas.drawText(string, 20, 20, paint);    		
+    		
+    		
+   
+    		
         }
     }
 	
