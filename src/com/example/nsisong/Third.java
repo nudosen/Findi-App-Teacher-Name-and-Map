@@ -3,6 +3,7 @@ package com.example.nsisong;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NavUtils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,19 +26,10 @@ public class Third extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+	    getActionBar().setHomeButtonEnabled(true);
 		//setContentView(R.layout.activity_third);
 		setContentView( new DrawView(this));
-		/*
-		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-			
-		}
-		*/
-		 //ViewGroup myLayout = (ViewGroup) findViewById(R.id.view1);
-
-	        //drawing = new DrawView(this);
-	        //myLayout.addView(drawing);  
 	}
 
 	@Override
@@ -54,6 +46,10 @@ public class Third extends ActionBarActivity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
+			return true;
+		}
+		if (id == R.id.home) {
+			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -78,7 +74,7 @@ public class Third extends ActionBarActivity {
         	
         	
             Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.third);
-    	//replace third with first and second respectively
+            //replace third with first and second respectively
     		int ThirdFloorPicturex= bmp.getHeight();
     		int ThirdFloorPicturey= bmp.getWidth();
     		Rect src = new Rect();
@@ -94,16 +90,43 @@ public class Third extends ActionBarActivity {
     		src.left=0;
     		src.top=0;
     		
+    		
+    		String newString;
+    		String NumberRoom;
+    		String CoordinateX;
+    		String CoordinateY;
+    		String NameTheTeacher;
+			Bundle extras = getIntent().getExtras();
+			if(extras == null) {
+				newString= null;
+				CoordinateX= "-1";
+				CoordinateY= "-1";
+				NumberRoom= "-1";
+				NameTheTeacher= "-1";
+		    } else {
+	        	CoordinateX= extras.getString("CoordinateX");
+	        	CoordinateY= extras.getString("CoordinateY");
+	        	NumberRoom= extras.getString("RoomNumber");
+	        	NameTheTeacher= extras.getString("teacherName");
+		    }
+    			   
+int CoordX= Integer.parseInt(CoordinateX);
+int CoordY=Integer.parseInt(CoordinateY);
+
 
     		
     		canvas.drawBitmap(bmp, src, dst, null);
     		
-    		canvas.drawCircle(31, 48, radius, paint);
+    		canvas.drawCircle(CoordX, CoordY, radius, paint);
 
+    		//delete code below when you finish with your coordinates
     		String string = Integer.toString(ThirdFloorPicturex) + ", " + Integer.toString(ThirdFloorPicturey);
     		paint.setTextSize(20);
-    		canvas.drawText(string, 20, 20, paint);    		
+    		canvas.drawText(string, 20, 20, paint);   
     		
+    		//showing the room number
+    		canvas.drawText(NumberRoom, 20, 40, paint );
+    		canvas.drawText(NameTheTeacher, 20, 60, paint);
     		
    
     		

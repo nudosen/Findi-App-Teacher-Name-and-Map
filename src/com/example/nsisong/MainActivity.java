@@ -40,13 +40,18 @@ public class MainActivity extends ActionBarActivity {
 	{
 		//Intent intent = new Intent(this,DisplayMessageActivity.class);
 		EditText editText = (EditText) findViewById(R.id.edit_message);
-		String message = editText.getText().toString();
+		String teacherName = editText.getText().toString();
 		//SharedPreferences sharedPref =getPreferences(Context.MODE_PRIVATE);
 		//SharedPreferences.Editor editor = sharedPref.edit();
-		String foundRoom=FindTeacherNumber(message);
+		String[] teacherInformation=FindTeacherNumber(teacherName);
 	
 	
-	int RoomNumber = Integer.valueOf(foundRoom); 
+	String RoomNumberString=teacherInformation[0];
+	String CoordinateX=teacherInformation[1];
+	String CoordinateY= teacherInformation[2];
+
+	int RoomNumber= Integer.parseInt(teacherInformation[0]);
+	//Use integer version to figure out floor, string used to stores extra
 	
 	Intent floorIntent = null;
 	
@@ -69,15 +74,21 @@ public class MainActivity extends ActionBarActivity {
 	}
 	else
 	{
-		 floorIntent.putExtra("RoomNumber", "Room Number: " + foundRoom);
+		 floorIntent.putExtra("RoomNumber", "Room Number: " + RoomNumberString);
+		 floorIntent.putExtra("CoordinateX", CoordinateX);
+		 floorIntent.putExtra("CoordinateY", CoordinateY);
+		 floorIntent.putExtra("teacherName", "Teacher Name:" + teacherName);
 		startActivity(floorIntent);
 		
 	}
 }
 
 	
-public String FindTeacherNumber(String teacher){
-	String message= "0";
+public String[] FindTeacherNumber(String teacher){
+	String RoomNumber= "Not found";
+	String CoordinateX ="-1";
+	String CoordinateY = "-1";
+	
 try {
 	InputStream inputStream = getResources().openRawResource(R.raw.database);
 	BufferedReader buf = new BufferedReader(new InputStreamReader(inputStream));
@@ -87,10 +98,15 @@ try {
 	{
 		String[] tokens = line.split(delims);
 		
-		if ((tokens.length == 2) &&
+		if ((tokens.length == 4) &&
 				tokens[0].toLowerCase().equals(teacher.toLowerCase()))
 		{		
-			message= tokens[1];
+			RoomNumber= tokens[1];
+			CoordinateX= tokens[2];
+			CoordinateY= tokens[3];
+			//CoordinateX= Integer.parseInt(tokens[2]);
+			//CoordinateY= Integer.parseInt(tokens[3]);
+			
 			break;
 		}
 	}
@@ -98,7 +114,8 @@ try {
 } catch(IOException e) {
              
 }
-return message;
+String[] teacherInformation = {RoomNumber, CoordinateX, CoordinateY};
+return teacherInformation;
 }
 TextView mTextView; // Member variable for text view in the layout
 	@Override

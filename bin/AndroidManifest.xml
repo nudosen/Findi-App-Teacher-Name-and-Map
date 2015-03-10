@@ -47,7 +47,8 @@
         </activity>
         <activity
             android:name=".Third"
-            android:label="@string/title_activity_third" >
+            android:label="@string/title_activity_third" 
+            android:parentActivityName=".MainActivity" >
         </activity>
     </application>
 
