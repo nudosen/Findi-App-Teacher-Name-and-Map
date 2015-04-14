@@ -81,7 +81,7 @@ public class Third extends ActionBarActivity {
     		Rect dst = new Rect();
     		
     		dst.right= x;
-    		dst.bottom= y-60;
+    		dst.bottom= y;
     		dst.left= 0;
     		dst.top= 0;
     		

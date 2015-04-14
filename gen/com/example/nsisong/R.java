@@ -1284,8 +1284,11 @@ containing a value of this type.
         public static final int findi2=0x7f020057;
         public static final int firstfloor1=0x7f020058;
         public static final int ic_launcher=0x7f020059;
-        public static final int secondfloor=0x7f02005a;
-        public static final int third=0x7f02005b;
+        public static final int redcircle=0x7f02005a;
+        public static final int redcircle2=0x7f02005b;
+        public static final int redcircle3=0x7f02005c;
+        public static final int secondfloor=0x7f02005d;
+        public static final int third=0x7f02005e;
     }
     public static final class id {
         public static final int action_bar=0x7f06002d;

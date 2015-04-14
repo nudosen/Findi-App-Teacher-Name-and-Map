@@ -20,10 +20,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.os.Build;
 
-public class FirstFloor extends ActionBarActivity
-
-
-{
+public class FirstFloor extends ActionBarActivity {
 	DrawView drawing;
 
 	@Override
@@ -32,13 +29,13 @@ public class FirstFloor extends ActionBarActivity
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	    getActionBar().setHomeButtonEnabled(true);
 		//setContentView(R.layout.activity_third);
-		setContentView( new DrawView(this));  
+		setContentView( new DrawView(this));
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.first_floor, menu);
+		getMenuInflater().inflate(R.menu.third, menu);
 		return true;
 	}
 
@@ -72,11 +69,20 @@ public class FirstFloor extends ActionBarActivity
         	int radius;
         	radius = 3;
         	Paint paint = new Paint();
-        	paint.setColor(Color.GREEN);
+        	paint.setColor(Color.BLACK);
+        	
+        	//loading the circle
+        	//Bitmap Indicator = BitmapFactory.decodeResource(getResources(), R.drawable.redcircle);
+        	
+    		
+    		//end weird code
+        	
+        	
         	
         	
         	
             Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.firstfloor1);
+            //Bitmap redcircle = BitmapFactory.decodeResource(getResources(), R.drawable.redcircle3);
             //replace third with first and second respectively
     		int FirstFloorPicturex= bmp.getHeight();
     		int FirstFloorPicturey= bmp.getWidth();
@@ -84,7 +90,7 @@ public class FirstFloor extends ActionBarActivity
     		Rect dst = new Rect();
     		
     		dst.right= x;
-    		dst.bottom= y+60;
+    		dst.bottom= y;
     		dst.left= 0;
     		dst.top= 0;
     		
@@ -93,22 +99,78 @@ public class FirstFloor extends ActionBarActivity
     		src.left=0;
     		src.top=0;
     		
+    		
+    		String newString;
+    		String NumberRoom;
+    		String CoordinateX;
+    		String CoordinateY;
+    		String NameTheTeacher;
+			Bundle extras = getIntent().getExtras();
+			if(extras == null) {
+				newString= null;
+				CoordinateX= "-1";
+				CoordinateY= "-1";
+				NumberRoom= "-1";
+				NameTheTeacher= "-1";
+		    } else {
+	        	CoordinateX= extras.getString("CoordinateX");
+	        	CoordinateY= extras.getString("CoordinateY");
+	        	NumberRoom= extras.getString("RoomNumber");
+	        	NameTheTeacher= extras.getString("teacherName");
+		    }
+    			   
+int CoordX= Integer.parseInt(CoordinateX);
+int CoordY=Integer.parseInt(CoordinateY);
+
 
     		
-    		canvas.drawBitmap(bmp, src, dst, null);
+    		canvas.drawBitmap(bmp, null, dst, null);
+    		//canvas.drawBitmap(redcircle, CoordX, CoordY, paint);
     		
-    		canvas.drawCircle(114, 120, radius, paint);
+    		canvas.drawCircle(CoordX, CoordY, radius, paint);
+    		
+    		
+    		//will draw the circle
+    		//canvas.drawBitmap(Indicator, radius, radius, null );
 
-    		String string = Integer.toString(FirstFloorPicturex) + ", " + Integer.toString(FirstFloorPicturey);
-    		paint.setTextSize(20);
-    		canvas.drawText(string, 20, 20, paint);    		
+    		//delete code below when you finish with your coordinates
+    		//String string = Integer.toString(FirstFloorPicturex) + ", " + Integer.toString(FirstFloorPicturey);
+    		//paint.setTextSize(20);
+    		//canvas.drawText(string, 20, 20, paint); 
     		
+    		//showing the room number
+    		paint.setTextSize(14);
+    		canvas.drawText(NumberRoom, 15, 250, paint );
+    		canvas.drawText(NameTheTeacher, 15, 268, paint);
     		
    
     		
         }
+    }
+	
+	/**
+	 * A placeholder fragment containing a simple view.
+	 */
+	public static class PlaceholderFragment extends Fragment {
+
+		public PlaceholderFragment() { 
+			/*this.getView().invalidate();
+		*/}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_third,
+					container, false);
+			return rootView;
+		}
+		
+		protected void onDraw (Canvas canvas)
+		{
+			/*
+			Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.layout.activity_third_floor);
+			canvas.drawBitmap(bmp, 50, 50, null);
+			*/
+		}
 	}
-
-
-
 }

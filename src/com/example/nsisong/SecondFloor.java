@@ -20,10 +20,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.os.Build;
 
-public class SecondFloor extends ActionBarActivity
-
-
-{
+public class SecondFloor extends ActionBarActivity {
 	DrawView drawing;
 
 	@Override
@@ -32,7 +29,7 @@ public class SecondFloor extends ActionBarActivity
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	    getActionBar().setHomeButtonEnabled(true);
 		//setContentView(R.layout.activity_third);
-		setContentView( new DrawView(this));  
+		setContentView( new DrawView(this));
 	}
 
 	@Override
@@ -67,8 +64,8 @@ public class SecondFloor extends ActionBarActivity
         @Override
         protected void onDraw(Canvas canvas) {
         	super.onDraw(canvas);
-        	int x = getMeasuredWidth();
-        	int y = getMeasuredHeight();
+        	int x = getWidth();
+        	int y = getHeight();
         	int radius;
         	radius = 3;
         	Paint paint = new Paint();
@@ -93,17 +90,43 @@ public class SecondFloor extends ActionBarActivity
     		src.left=0;
     		src.top=0;
     		
+    		
+    		String newString;
+    		String NumberRoom;
+    		String CoordinateX;
+    		String CoordinateY;
+    		String NameTheTeacher;
+			Bundle extras = getIntent().getExtras();
+			if(extras == null) {
+				newString= null;
+				CoordinateX= "-1";
+				CoordinateY= "-1";
+				NumberRoom= "-1";
+				NameTheTeacher= "-1";
+		    } else {
+	        	CoordinateX= extras.getString("CoordinateX");
+	        	CoordinateY= extras.getString("CoordinateY");
+	        	NumberRoom= extras.getString("RoomNumber");
+	        	NameTheTeacher= extras.getString("teacherName");
+		    }
+    			   
+int CoordX= Integer.parseInt(CoordinateX);
+int CoordY=Integer.parseInt(CoordinateY);
+
 
     		
     		canvas.drawBitmap(bmp, null, dst, null);
     		
-    		canvas.drawCircle(114, 120, radius, paint);
+    		canvas.drawCircle(CoordX, CoordY, radius, paint);
 
-    		//String string = Integer.toString(SecondFloorPicturex) + ", " + Integer.toString(SecondFloorPicturey);
-    		String string = Integer.toString(x) + ", " + Integer.toString(y);
+    		//delete code below when you finish with your coordinates
+    		String string = Integer.toString(SecondFloorPicturex) + ", " + Integer.toString(SecondFloorPicturey);
     		paint.setTextSize(20);
-    		canvas.drawText(string, 20, 20, paint);    		
+    		canvas.drawText(string, 20, 20, paint);   
     		
+    		//showing the room number and teacher name
+    		canvas.drawText(NumberRoom, 252, 119, paint );
+    		canvas.drawText(NameTheTeacher, 256, 123, paint);
     		
    
     		
@@ -122,7 +145,7 @@ public class SecondFloor extends ActionBarActivity
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.activity_second_floor,
+			View rootView = inflater.inflate(R.layout.fragment_third,
 					container, false);
 			return rootView;
 		}

@@ -57,47 +57,67 @@ Schulz;2309
 Cobey;2310
 
 McQueen;2401
-Lutes;2404
+Lutes;2404;166;83
 Printz Mr;2405
 McQuery;2407
-Nance;2408
-Lutterbie;2410
+Nance;2408;134;83
+Lutterbie;2410;103;83
 Cox;2411
 Printz Mrs;2413
-Hudson;2414
-Naylor;2416
+Hudson;2414;70;83
+Naylor;2416;28;83
 
-Bender Orchestra;1101
-Randall/Ling;1102
-Randall;1102
-Ling;1102
-Clark;1105
+Bender;1101;212;256
+Randall;1102;212;299
+Ling;1102;212;299
+Clark;1105;213;212
+Studio Theater;1100;226;344
+Studio Theatre;1100;226;344
+Performing Arts Center;1100;253;366
+PAC;1100;253;366
 
-Wethington;1201
-Nelson;1202;100;100
-Grissom/Wilson/Harritos/Rechel/Brotzman;1203
-Fleming;1206
-Cropp;1207
-Rose;1208
-Blanton;1212
-Moon/Haubner;1209
-Bauer;1211
+Wethington;1201;169;311
+Nelson;1202;166;365S
+Grissom/Wilson/Harritos/Rechel/Brotzman;1203;145;311
+Fleming;1206;133;364
+Cropp;1207;119;311
+Rose;1208;100;364
+Blanton;1212;70;364
+Moon/Haubner;1209;80;311
+Bauer;1211;26;363
+Restroom;1200;183;337
 
-Carroll;1303
-Mann/Harritos;1304
-Allen/Grissom;1305
-Thornhill;1306
-Curp;1307
-Bohland;1308
-Gronostaj;1309
-Blower;1310
+Carroll;1303;160;170;
+Mann/Harritos;1304;160;210
+Allen/Grissom;1305;116;170
+Thornhill;1306;117;210
+Curp;1307;72;170
+Bohland;1308;72;210
+Gronostaj;1309;29;173
+Blower;1310;28;210
 
-Lindeberg;1401
-Burch;1402
-Thatcher;1403
-Jones/Speigel;1406
-Klaber;1408
-Harmon;1412
-Montgomery;1405
-Aguilar;1414
-Roark/Speigeleisen;1407
+Lindeberg;1401;169;44
+Burch;1402;169;85
+Thatcher;1403;125;44
+*Jones;1406;135;85
+Speigel;1406;135;85
+Klaber;1408;104;85
+Harmon;1412;70;82
+Montgomery;1405;77;44
+Aguilar;1414;28;82
+Roark;1407;28;44
+Speigeleisen;1407;28;44
+Restroom;1400;182;56
+
+Reed Mr;1501;224;43
+Knox;1501;224;43
+Teacher2;1502;202;85
+Stieger;1505;226;84
+Hubbard;1505;226;84
+Nathan;1505;226;84
+Fletcher;1506;250;84
+
+Arena;1500;287;27
+Gym;1500;287;27
+Aux Gym;1500;248;48
+Auxiliary Gym;248;48
