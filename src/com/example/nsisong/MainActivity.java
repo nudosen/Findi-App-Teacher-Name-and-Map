@@ -5,6 +5,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.example.nsisong.R;
 import android.support.v7.app.ActionBarActivity;
@@ -20,23 +25,36 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.os.Build;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 
 public class MainActivity extends ActionBarActivity {
 	public final static String EXTRA_MESSAGE = "com.example.nsisong.MESSAGE";
 
-	/** Called when the user clicks the Send button */
-	public void sendMessage(View view) 
+	private Spinner spinner2;
+	private Button btnSubmit;
+	
+	public String selectedTeacher;
+	
+	//** Called when the user clicks the Send button */
+	public void sendMessage(View view)
 	{
 		//Intent intent = new Intent(this,DisplayMessageActivity.class);
 		EditText editText = (EditText) findViewById(R.id.edit_message);
@@ -45,79 +63,103 @@ public class MainActivity extends ActionBarActivity {
 		//SharedPreferences.Editor editor = sharedPref.edit();
 		String[] teacherInformation=FindTeacherNumber(teacherName);
 	
-	
-	String RoomNumberString=teacherInformation[0];
-	String CoordinateX=teacherInformation[1];
-	String CoordinateY= teacherInformation[2];
+		String RoomNumberString=teacherInformation[0];
+		String CoordinateX=teacherInformation[1];
+		String CoordinateY= teacherInformation[2];
 
-	int RoomNumber= Integer.parseInt(teacherInformation[0]);
-	//Use integer version to figure out floor, string used to stores extra
+		int RoomNumber= Integer.parseInt(teacherInformation[0]);
+		//Use integer version to figure out floor, string used to stores extra
 	
-	Intent floorIntent = null;
+		Intent floorIntent = null;
 	
-	if ( RoomNumber < 4000 && RoomNumber > 3000)	
-	{
-		floorIntent = new Intent(this, Third.class);
-	}
-	else if (RoomNumber < 3000 && RoomNumber > 2000)
-	{
-		floorIntent = new Intent(this, SecondFloor.class);
-	}
-	else if (RoomNumber < 2000 && RoomNumber > 1000)
-	{ 
-		 floorIntent = new Intent(this, FirstFloor.class);
-		
-	}
-	if (floorIntent == null)
-	{ 
-		editText.setError("Error! Teacher not found."); //error
-	}
-	else
-	{
-		 floorIntent.putExtra("RoomNumber", "Room Number: " + RoomNumberString);
-		 floorIntent.putExtra("CoordinateX", CoordinateX);
-		 floorIntent.putExtra("CoordinateY", CoordinateY);
-		 floorIntent.putExtra("teacherName", "Teacher Name:" + teacherName);
-		startActivity(floorIntent);
-		
-	}
-}
-
-	
-public String[] FindTeacherNumber(String teacher){
-	String RoomNumber= "Not found";
-	String CoordinateX ="-1";
-	String CoordinateY = "-1";
-	
-try {
-	InputStream inputStream = getResources().openRawResource(R.raw.database);
-	BufferedReader buf = new BufferedReader(new InputStreamReader(inputStream));
-	String line;
-	String delims = ";";
-	while((line=buf.readLine())!= null)
-	{
-		String[] tokens = line.split(delims);
-		
-		if ((tokens.length == 4) &&
-				tokens[0].toLowerCase().equals(teacher.toLowerCase()))
-		{		
-			RoomNumber= tokens[1];
-			CoordinateX= tokens[2];
-			CoordinateY= tokens[3];
-			//CoordinateX= Integer.parseInt(tokens[2]);
-			//CoordinateY= Integer.parseInt(tokens[3]);
+		if ( RoomNumber < 4000 && RoomNumber > 3000)	
+		{
+			floorIntent = new Intent(this, Third.class);
+		}
+		else if (RoomNumber < 3000 && RoomNumber > 2000)
+		{
+			floorIntent = new Intent(this, SecondFloor.class);
+		}
+		else if (RoomNumber < 2000 && RoomNumber > 1000)
+		{ 
+			 floorIntent = new Intent(this, FirstFloor.class);
 			
-			break;
+		}
+		if (floorIntent == null)
+		{ 
+			editText.setError("Error! Teacher not found."); //error
+		}
+		else
+		{
+			 floorIntent.putExtra("RoomNumber", "Room Number: " + RoomNumberString);
+			 floorIntent.putExtra("CoordinateX", CoordinateX);
+			 floorIntent.putExtra("CoordinateY", CoordinateY);
+			 floorIntent.putExtra("teacherName", "Teacher Name:" + teacherName);
+			 startActivity(floorIntent);
 		}
 	}
-                    
-} catch(IOException e) {
-             
-}
-String[] teacherInformation = {RoomNumber, CoordinateX, CoordinateY};
-return teacherInformation;
-}
-TextView mTextView; // Member variable for text view in the layout
+
+	public String[] FindTeacherNumber(String teacher){
+		String RoomNumber= "0";
+		String CoordinateX ="-1";
+		String CoordinateY = "-1";
+		
+		if (teacher.isEmpty() == false)
+		{
+			try {
+				InputStream inputStream = getResources().openRawResource(R.raw.database);
+				BufferedReader buf = new BufferedReader(new InputStreamReader(inputStream));
+				String line;
+				String delims = ";";
+				while((line=buf.readLine())!= null)
+				{
+					String[] tokens = line.split(delims);
+					
+					if ((tokens.length == 4) &&
+							tokens[0].toLowerCase().equals(teacher.toLowerCase()))
+					{		
+						RoomNumber= tokens[1];
+						CoordinateX= tokens[2];
+						CoordinateY= tokens[3];
+						//CoordinateX= Integer.parseInt(tokens[2]);
+						//CoordinateY= Integer.parseInt(tokens[3]);
+						
+						break;
+					}
+				}
+			                    
+			} catch(IOException e) {
+			             
+			}
+		}
+		String[] teacherInformation = {RoomNumber, CoordinateX, CoordinateY};
+		return teacherInformation;
+	}
+	
+	public LinkedList<TeacherInformation> readDatabase()
+	{
+		LinkedList<TeacherInformation> list = new LinkedList();
+		try {
+		InputStream inputStream = getResources().openRawResource(R.raw.database);
+		BufferedReader buf = new BufferedReader(new InputStreamReader(inputStream));
+		String line;
+		String delims = ";";
+		while((line=buf.readLine())!= null)
+		{
+			String[] tokens = line.split(delims);
+			
+			if (tokens.length == 4)
+			{ 
+				list.add(new TeacherInformation("", tokens[0], tokens[1], tokens[2], tokens[3]));
+				}
+		
+		}
+		}catch(IOException e) {
+	        
+		}
+		return list;
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -125,19 +167,60 @@ TextView mTextView; // Member variable for text view in the layout
 	    // The layout file is defined in the project res/layout/main_activity.xml file
 	    setContentView(R.layout.activity_main);
 	    
-	    // Initialize member TextView so we can manipulate it later
-	    mTextView = (TextView) findViewById(R.id.edit_message);
-	    
 		setContentView(R.layout.activity_main);
 		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
+			getSupportFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment()).commit();
 		}
+		addListenerOnButton();
+		addListenerOnSpinnerItemSelection();
+	    
+	    LinkedList<TeacherInformation> list = readDatabase();
+	    
+	    Iterator<TeacherInformation> itr = list.iterator();
+	    List<String> TILN = new ArrayList<String>();
+	    while (itr.hasNext()) {
+	    	TILN.add(itr.next().LastName);
+	    }
+	    Collections.sort(TILN);
+	    spinner2= (Spinner)findViewById(R.id.spinner2);
+	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,TILN);
+	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+	    spinner2.setAdapter(adapter);	
 	}
-
+	
+	public void addListenerOnButton() {
+			
+		spinner2 = (Spinner) findViewById(R.id.spinner2);
+		btnSubmit = (Button) findViewById(R.id.btnSubmit);
+	 
+		btnSubmit.setOnClickListener(new OnClickListener() {
+	 
+		  @Override
+		  public void onClick(View v) {
+	 /*
+		    Toast.makeText(MainActivity.this,
+			"OnClickListener : " + 
+	                "\nSpinner 2 : "+ String.valueOf(spinner2.getSelectedItem()),
+				Toast.LENGTH_SHORT).show();
+		    */
+			// two lines got the text out of the spinner into the send message thing
+			  EditText editText = (EditText) findViewById(R.id.edit_message);
+			  editText.setText(String.valueOf(spinner2.getSelectedItem()));
+			  MainActivity.this.selectedTeacher = String.valueOf(spinner2.getSelectedItem());
+			  MainActivity.this.sendMessage(v);
+		  }
+	 
+		});
+	}
+	
+	public void addListenerOnSpinnerItemSelection() {
+		spinner2 = (Spinner) findViewById(R.id.spinner2);
+		spinner2.setOnItemSelectedListener(new CustomOnItemSelectedListener());
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
+	// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}

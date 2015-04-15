@@ -267,13 +267,14 @@ int id action_context_bar 0x7f06002e
 int id action_menu_divider 0x7f060027
 int id action_menu_presenter 0x7f060028
 int id action_mode_close_button 0x7f060035
-int id action_settings 0x7f060052
+int id action_settings 0x7f060054
 int id activity_chooser_view_content 0x7f060036
 int id alignBounds 0x7f060002
 int id alignMargins 0x7f060003
 int id always 0x7f06001d
 int id beginning 0x7f060023
 int id bottom 0x7f060005
+int id btnSubmit 0x7f060051
 int id center 0x7f06000c
 int id center_horizontal 0x7f06000a
 int id center_vertical 0x7f060008
@@ -286,7 +287,7 @@ int id default_activity_button 0x7f060039
 int id dialog 0x7f060020
 int id disableHome 0x7f06001a
 int id dropdown 0x7f060021
-int id edit_message 0x7f060051
+int id edit_message 0x7f060053
 int id edit_query 0x7f060041
 int id end 0x7f060011
 int id expand_activities_button 0x7f060037
@@ -326,6 +327,7 @@ int id shortcut 0x7f06003f
 int id showCustom 0x7f060019
 int id showHome 0x7f060016
 int id showTitle 0x7f060018
+int id spinner2 0x7f060050
 int id split_action_bar 0x7f06002f
 int id start 0x7f060010
 int id submit_area 0x7f06004a
@@ -337,7 +339,7 @@ int id top_action_bar 0x7f060031
 int id up 0x7f060032
 int id useLogo 0x7f060015
 int id vertical 0x7f060001
-int id view1 0x7f060050
+int id view1 0x7f060052
 int id withText 0x7f06001e
 int integer abc_max_action_buttons 0x7f0a0000
 int layout abc_action_bar_decor 0x7f030000
