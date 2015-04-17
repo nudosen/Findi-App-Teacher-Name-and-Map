@@ -186,6 +186,7 @@ public class MainActivity extends ActionBarActivity {
 	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,TILN);
 	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	    spinner2.setAdapter(adapter);	
+	    //spinner2.setPrompt("or select a teacher's name or building location");
 	}
 	
 	public void addListenerOnButton() {

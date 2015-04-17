@@ -73,7 +73,7 @@ public class SecondFloor extends ActionBarActivity {
         	
         	
         	
-            Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.secondfloor);
+            Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.secondflooredit);
             //replace third with first and second respectively
     		int SecondFloorPicturex= bmp.getHeight();
     		int SecondFloorPicturey= bmp.getWidth();
@@ -120,13 +120,14 @@ int CoordY=Integer.parseInt(CoordinateY);
     		canvas.drawCircle(CoordX, CoordY, radius, paint);
 
     		//delete code below when you finish with your coordinates
-    		String string = Integer.toString(SecondFloorPicturex) + ", " + Integer.toString(SecondFloorPicturey);
+    		/*String string = Integer.toString(SecondFloorPicturex) + ", " + Integer.toString(SecondFloorPicturey);
     		paint.setTextSize(20);
-    		canvas.drawText(string, 20, 20, paint);   
+    		canvas.drawText(string, 20, 20, paint); */  
     		
     		//showing the room number and teacher name
-    		canvas.drawText(NumberRoom, 252, 119, paint );
-    		canvas.drawText(NameTheTeacher, 256, 123, paint);
+    		paint.setTextSize(14);
+    		canvas.drawText(NumberRoom, 16, 251, paint );
+    		canvas.drawText(NameTheTeacher, 16, 261, paint);
     		
    
     		

@@ -1288,7 +1288,8 @@ containing a value of this type.
         public static final int redcircle2=0x7f02005b;
         public static final int redcircle3=0x7f02005c;
         public static final int secondfloor=0x7f02005d;
-        public static final int third=0x7f02005e;
+        public static final int secondflooredit=0x7f02005e;
+        public static final int third=0x7f02005f;
     }
     public static final class id {
         public static final int action_bar=0x7f06002d;
@@ -1496,6 +1497,7 @@ containing a value of this type.
         public static final int edit_message=0x7f0b000e;
         public static final int first_floor_plan=0x7f0b0014;
         public static final int hello_world=0x7f0b0013;
+        public static final int submit=0x7f0b0019;
         public static final int title_activity_display_message=0x7f0b0012;
         public static final int title_activity_first_floor=0x7f0b0017;
         public static final int title_activity_main=0x7f0b0011;

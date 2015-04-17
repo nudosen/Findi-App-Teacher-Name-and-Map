@@ -23,6 +23,6 @@
         android:layout_height="350dp"
         android:layout_alignLeft="@+id/textView1"
         android:layout_alignParentBottom="true"
-        android:src="@drawable/secondfloor" />
+        android:src="@drawable/secondflooredit" />
 
 </RelativeLayout>
