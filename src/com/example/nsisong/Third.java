@@ -110,8 +110,8 @@ public class Third extends ActionBarActivity {
 	        	NameTheTeacher= extras.getString("teacherName");
 		    }
     			   
-			int CoordX= Integer.parseInt(CoordinateX);
-			int CoordY=Integer.parseInt(CoordinateY);
+int CoordX= Integer.parseInt(CoordinateX);
+int CoordY=Integer.parseInt(CoordinateY);
 
 
     		

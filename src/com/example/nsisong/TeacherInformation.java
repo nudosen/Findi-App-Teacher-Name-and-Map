@@ -4,7 +4,7 @@ public class TeacherInformation {
 	public String LastName;
 	public String RoomNumber;
 	public int XCoordinate;
-	public int YCoordinate;
+	public int YCoordinate; 
 	
 	public TeacherInformation( String FN, String LN, String RN, String X, String Y)
 	{
@@ -13,6 +13,6 @@ public class TeacherInformation {
 		RoomNumber = RN;
 		XCoordinate = Integer.parseInt(X);
 		YCoordinate = Integer.parseInt(Y);
-	}
+	}}
 	
-}
+	
