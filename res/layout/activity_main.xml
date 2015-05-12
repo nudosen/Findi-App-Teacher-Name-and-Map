@@ -7,21 +7,6 @@
     tools:context="com.example.nsisong.MainActivity"
     tools:ignore="MergeRootFrame" >
 
-    <Spinner
-        android:id="@+id/spinner2"
-        style="@style/Theme.AppCompat"
-        android:layout_width="match_parent"
-        android:layout_height="126dp"
-        android:text="Select a teacher"
-        tools:listitem="@android:layout/simple_spinner_item" />
-
-    <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="Submit" 
-    	android:onClick="sendMessage" />
-
+   
 </FrameLayout>
 
